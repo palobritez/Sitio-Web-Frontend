@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 
 function Home() {
-  return <h2>Catalogo</h2>;
+  return <><h2>CATALOGO</h2><Grids/></>;
 }
 
 function About() {
@@ -21,17 +21,14 @@ function App() {
         <header className="App-header">
           
           <p>
-          CATALOGO
           <ContainedButtons/>
           </p>
         </header>    
-        <body>
-          <Grids/>
-        </body>
 
         <Route path="/" exact component={Home}/>
            
         <Route path="/about" component={About}/>
+
 
       </Router>
     </div>
