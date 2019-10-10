@@ -19,13 +19,12 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import SettingsIcon from '@material-ui/icons/Settings';
-
 import Edit from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 
 
 
@@ -75,6 +74,16 @@ const useStyles = makeStyles(theme => ({
   }));
 
   
+ export function SimpleContainer() {
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <Container maxWidth="lg">
+<Cards/>
+        </Container>
+      </React.Fragment>
+    );
+  }
   
   // Funcion que reacrea los links o rutas que tendran los botones para que las pantallas se ajusten a lo que se debe estar
   // mostrano en ese momento
@@ -122,16 +131,13 @@ const useStyles = makeStyles(theme => ({
   //   }
     // TODO
 // Mejorar los grids para poder marcar favoritos (todos los archivos son sacados de material-ui de la version 4.5.0) 
-export function Cards() {
+export default function Cards() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
     
- const IconButton = (DeleteIcon) => {
-
- }
   };
   
 
@@ -152,19 +158,18 @@ export function Cards() {
       />
       <CardMedia
         className={classes.media}
-        image="C:\Users\WINNER SRL\Desktop\UPA\Agrointec\Logo Agrointec (Palo)\logo_palo_FINAL_ORIGINAL.jpg"
-        title="Agrointec"
+        image="\UPA\Agrointec\Logo Agrointec (Palo)\logo_palo_FINAL_ORIGINAL.jpg"
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          A new kind of Place.
+          Precio: 
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon/>
         </IconButton>
-        <IconButton arial-label="Delete" onClick={oldData.id}>
+        <IconButton arial-label="Delete">
         <DeleteIcon/>
         </IconButton>
         <IconButton
