@@ -164,7 +164,7 @@ export function Cards() {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton arial-label="Delete" onClick={Delete.id}>
+        <IconButton arial-label="Delete" onClick={oldData.id}>
         <DeleteIcon/>
         </IconButton>
         <IconButton
@@ -182,7 +182,7 @@ export function Cards() {
         <CardContent>
           <Typography paragraph>Descripcion:</Typography>
           <Typography paragraph>
-            Empresa especializada en contruccion e instalacion de invernaderos con un sistema diferenciado.
+            Empresa especializada en construccion e instalacion de invernaderos con un sistema diferenciado.
           </Typography>
           <Typography paragraph>
             Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
