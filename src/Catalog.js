@@ -129,13 +129,9 @@ export function Cards() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
     
-  // const cardIcons = {
-  //     Delete: setDelete((props, ref) => <DeleteOutline {...props} ref={ref} />),
-  //     Edit: setEdit((props, ref) => <Edit {...props} ref={ref} />),
-  //     ThirdStateCheck: setRemove((props, ref) => <Remove {...props} ref={ref} />),
-  //     Check: setCheck((props, ref) => <Check {...props} ref={ref} />),
-  
-  //   }
+ const IconButton = (DeleteIcon) => {
+
+ }
   };
   
 
@@ -168,7 +164,7 @@ export function Cards() {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton arial-label="Delete">
+        <IconButton arial-label="Delete" onClick={Delete.id}>
         <DeleteIcon/>
         </IconButton>
         <IconButton
