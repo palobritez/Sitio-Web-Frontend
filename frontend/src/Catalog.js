@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -25,6 +24,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import IntegrationTextField from './formulario';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import axios from 'axios'; 
 
 
 
@@ -72,12 +73,11 @@ const useStyles = makeStyles(theme => ({
     },
   
   }));
-
   
  export function SimpleContainer() {
     return (
       <React.Fragment>
-        <CssBaseline />
+        <CssBaseline/>
         <Container maxWidth="lg">
 <Cards/>
         </Container>
@@ -137,7 +137,13 @@ function Form(){
   );
 }
 
-export default function Cards() {
+function Editar({match}) {
+  alert("editaaaaaaaar");
+  return <><h2>Añadir Producto</h2></>;
+}
+
+export default function Cards({match}) {
+  const [productos, setProductos] = React.useState([]);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -145,51 +151,79 @@ export default function Cards() {
     setExpanded(!expanded);
     
   };
+
+  React.useEffect(() =>{
+
+    axios.get('/ws/rest/productos')
+    .then(res => {
+      const productos = res.data;
+      // this.setState({ productos: res.data });
+      setProductos(productos);
+      // console.log(productos);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+  } );
+
+
   return (
+
+    
+      productos.map(p => {
+
+      return(
     <Card className={classes.card}>
-      <CardHeader
-        action={
-        <IconButton aria-label="settings" onClick = "<IntegrationTextField/>">
-            <Edit>
-              </Edit>
-          </IconButton>
-        }
-        title="Prueba"
-      />
-      <CardMedia
-        className={classes.media}
-        image="https://ichef.bbci.co.uk/images/ic/640x360/p0659ssc.jpg"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        <a>
+    <CardHeader
+      action={
+      <IconButton aria-label="settings">
+        <Link to={`productos/edit/${p.id}`}>
+          <Edit>
+            </Edit>
+        </Link>
+        </IconButton>
+      }
+      title="Prueba"
+    />
+    <CardMedia
+      className={classes.media}
+      image="https://ichef.bbci.co.uk/images/ic/640x360/p0659ssc.jpg"
+    />
+    <CardContent>
+      <Typography variant="body2" color="textSecondary" component="p">
+      <a>
 Montaña del Himalaya
-        </a>
-        </Typography>
+      </a>
+      </Typography>
+    </CardContent>
+    <CardActions disableSpacing>
+      <IconButton aria-label="add to favorites">
+        <FavoriteIcon/>
+      </IconButton>
+      <IconButton arial-label="Delete" onClick = "">
+      <DeleteIcon/>
+      </IconButton>
+      <IconButton
+        className={clsx(classes.expand, {
+          [classes.expandOpen]: expanded,
+        })}
+        onClick={handleExpandClick}
+        aria-expanded={expanded}
+        aria-label="show more"
+      >
+        <ExpandMoreIcon />
+      </IconButton>
+    </CardActions>
+    <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <CardContent>
+        Descripcion del producto
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon/>
-        </IconButton>
-        <IconButton arial-label="Delete" onClick = "">
-        <DeleteIcon/>
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          Descripcion del producto
-        </CardContent>
-      </Collapse>
-    </Card>
+    </Collapse>
+  </Card>
+      )
+      })
+    
+
   );
 }
